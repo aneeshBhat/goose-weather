@@ -7,6 +7,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Material Data tables
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -25,6 +26,8 @@ import { RadarDesktopComponent } from './cards/radar-desktop/radar-desktop/radar
 import { RadarMobileComponent } from './cards/radar-mobile/radar-mobile/radar-mobile.component';
 import { WeatherDiscussionComponent } from './cards/weather-discussion/weather-discussion/weather-discussion.component';
 import { WeeklyForecastComponent } from './cards/weekly-forecast/weekly-forecast/weekly-forecast.component';
+import { EffectsModule } from '@ngrx/effects';
+import { WeatherEffects } from './weather/weather.effect';
 
 
 @NgModule({
@@ -40,15 +43,19 @@ import { WeeklyForecastComponent } from './cards/weekly-forecast/weekly-forecast
     RadarMobileComponent,
     WeatherDiscussionComponent,
     WeeklyForecastComponent,
+   
     
   ], 
   imports: [
     BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([WeatherEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
